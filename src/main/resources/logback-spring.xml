@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+<!-- 開発環境 (デフォルト)-->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %level - %msg \(%file:%line\)%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+
+<!-- 本番環境 spring.profiles.active=production -->
+<springProfile name="production" >
+  
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_FILE}</file>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %level - %msg \(%file:%line\)%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+  </root>
+</springProfile>
+</configuration>
+    
+
